@@ -1,0 +1,113 @@
+/* Login.css */
+
+/* 1. Color Palette (Soft Blue‑Gray) */
+:root {
+  --bg-page:       #f5f7fa;    /* very light gray‑blue */
+  --bg-panel:      #ffffff;    /* white for the form */
+  --brand:         #005f99;    /* rich blue */
+  --brand-hover:   #004f7a;    /* darker on hover */
+  --text-primary:  #1a1a1a;    /* dark charcoal */
+  --text-muted:    #6b7280;    /* cool gray */
+  --error-color:   #e02424;    /* vivid red for errors */
+  --shadow-light:  rgba(0,0,0,0.08);
+}
+
+/* 2. Page & Container */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg-page);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* 3. Form Panel */
+.login-form {
+  width: 340px;
+  padding: 2rem;
+  background: var(--bg-panel);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  border: 1px solid var(--shadow-light);
+}
+
+.login-form h2 {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--brand);
+  font-size: 1.5rem;
+}
+
+/* 4. Labels & Inputs */
+.login-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.65rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--text-muted);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(0, 95, 153, 0.2);
+}
+
+/* 5. Button */
+.login-form button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.25rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.login-form button:hover {
+  background: var(--brand-hover);
+  transform: translateY(-1px);
+}
+
+.login-form button:active {
+  transform: translateY(0);
+}
+
+/* 6. Error Message */
+.error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* 7. Responsive tweaks */
+@media (max-width: 380px) {
+  .login-form {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+}

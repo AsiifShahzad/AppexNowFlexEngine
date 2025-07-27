@@ -12,7 +12,6 @@ supabase = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 
 app = FastAPI()
 
-# Replace with your frontend's origin. Use "*" only in dev
 origins = ["http://localhost:5173"]
 
 app.add_middleware(

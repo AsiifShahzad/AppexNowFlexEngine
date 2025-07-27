@@ -1,24 +1,117 @@
+/* 1. Color Palette (Soft Blue‑Gray) */
+:root {
+  --bg-page:       #f5f7fa;    /* very light gray‑blue */
+  --bg-panel:      #ffffff;    /* white for panels */
+  --brand:         #005f99;    /* rich blue */
+  --brand-hover:   #004f7a;    /* darker blue */
+  --text-primary:  #1a1a1a;    /* dark charcoal */
+  --text-muted:    #6b7280;    /* cool gray */
+  --shadow-light:  rgba(0,0,0,0.08);
+}
+
+/* 2. Global Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
 }
 
-/* Header/Navbar Styles */
+/* 3. Header/Navbar Styles */
 header {
+  display: flex;
+  align-items: center;       
+  justify-content: center;   /* CENTER everything */
   top: 0;
   width: 100%;
-  background-color: white;
+  background-color: var(--brand);
+  box-shadow: 0 2px 6px var(--shadow-light);
   z-index: 1000;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   padding: 0.75rem 1.5rem;
-  box-shadow: 2px 2px 2px 2px rgba(0.05, 0.05, 0.05, 0.05);;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+header>h1{
+  color:white;
+}
+
+/* 4. Logo/Brand */
+header .logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+/* 5. Navigation Links */
+header nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+header nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+header nav a:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Optional: active link underline */
+header nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
+/* 6. Call‑to‑Action Button */
+header .cta {
+  margin-left: 2rem;
+  padding: 0.5rem 1rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+header .cta:hover {
+  background: var(--brand-hover);
+  transform: translateY(-1px);
+}
+
+header .cta:active {
+  transform: translateY(0);
+}
+
+/* 7. Responsive */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  header nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

@@ -11,6 +11,8 @@ const EmployeeInput = () => {
     location: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const [response, setResponse] = useState(null);
 
   const handleChange = (e) => {
@@ -22,17 +24,40 @@ const EmployeeInput = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data before transform:", formData);
 
- const payload = {
-  employeeId: formData.employeeId,
-  currentSalary: parseFloat(formData.currentSalary),
-  yearsExperience: parseFloat(formData.yearsExperience),
-  performanceScore: parseFloat(formData.performanceScore),
-  jobRole: formData.jobRole,
-  location: formData.location,
-};
+    const newErrors = {};
 
+    // ✅ Validate Current Salary
+    const salary = parseFloat(formData.currentSalary);
+    if (!formData.currentSalary || isNaN(salary) || salary <= 0) {
+      newErrors.currentSalary = "Please enter a valid salary (greater than 0)";
+    }
+    // ✅ Experience validation
+    const experience = parseFloat(formData.yearsExperience);
+    if (!formData.yearsExperience || isNaN(experience) || experience < 0) {
+      newErrors.yearsExperience = "Experience cannot be negative";
+    }
+    // ✅ Validate Performance Score
+    const score = parseFloat(formData.performanceScore);
+    if (!formData.performanceScore || isNaN(score) || score < 1 || score > 10) {
+      newErrors.performanceScore = "Score must be a number between 1 and 10";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({}); // clear errors if valid
+
+    const payload = {
+      employeeId: formData.employeeId,
+      currentSalary: salary,
+      yearsExperience: experience,
+      performanceScore: score,
+      jobRole: formData.jobRole,
+      location: formData.location,
+    };
 
     console.log("Transformed payload:", payload);
 
@@ -59,7 +84,7 @@ const EmployeeInput = () => {
           className="form-input"
           type="text"
           name="employeeId"
-          placeholder="Employee ID"
+          placeholder="e.g. emp1234"
           value={formData.employeeId}
           onChange={handleChange}
           required
@@ -70,40 +95,50 @@ const EmployeeInput = () => {
           className="form-input"
           type="number"
           name="currentSalary"
-          placeholder="Current Salary"
-          value={formData.salary}
+          placeholder="salary in PKR"
+          value={formData.currentSalary}
           onChange={handleChange}
           required
         />
-
+        {errors.currentSalary && (
+          <span className="error-text">{errors.currentSalary}</span>
+        )}
         <label htmlFor="tenure">Years of Experience</label>
         <input
           className="form-input"
           type="number"
           name="yearsExperience"
-          placeholder="Years of Experience"
+          placeholder="experience in years"
           value={formData.tenure}
           onChange={handleChange}
           required
         />
+        {errors.yearsExperience && (
+          <span className="error-text">{errors.yearsExperience}</span>
+        )}
 
         <label htmlFor="score">Performance Score</label>
         <input
           className="form-input"
           type="number"
           name="performanceScore"
-          placeholder="Performance Score"
-          value={formData.score}
+          placeholder="score between 1-10"
+          value={formData.performanceScore}
           onChange={handleChange}
+          min={1}
+          max={10}
           required
         />
+        {errors.performanceScore && (
+          <span className="error-text">{errors.performanceScore}</span>
+        )}
 
         <label htmlFor="role">Job Role</label>
         <input
           className="form-input"
           type="text"
           name="jobRole"
-          placeholder="Job Role"
+          placeholder="e.g. Software Engineer"
           value={formData.role}
           onChange={handleChange}
           required
@@ -114,7 +149,7 @@ const EmployeeInput = () => {
           className="form-input"
           type="text"
           name="location"
-          placeholder="Location"
+          placeholder="e.g. Lahore"
           value={formData.location}
           onChange={handleChange}
           required
