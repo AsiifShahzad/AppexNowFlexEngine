@@ -24,14 +24,15 @@ const EmployeeInput = () => {
     e.preventDefault();
     console.log("Form data before transform:", formData);
 
-    const payload = {
-      employeeId: formData.employeeId,
-      currentSalary: parseFloat(formData.salary),
-      yearsExperience: parseFloat(formData.tenure),
-      performanceScore: parseFloat(formData.score),
-      jobRole: formData.role,
-      location: formData.location,
-    };
+ const payload = {
+  employeeId: formData.employeeId,
+  currentSalary: parseFloat(formData.currentSalary),
+  yearsExperience: parseFloat(formData.yearsExperience),
+  performanceScore: parseFloat(formData.performanceScore),
+  jobRole: formData.jobRole,
+  location: formData.location,
+};
+
 
     console.log("Transformed payload:", payload);
 
@@ -68,7 +69,7 @@ const EmployeeInput = () => {
         <input
           className="form-input"
           type="number"
-          name="salary"
+          name="currentSalary"
           placeholder="Current Salary"
           value={formData.salary}
           onChange={handleChange}
@@ -79,7 +80,7 @@ const EmployeeInput = () => {
         <input
           className="form-input"
           type="number"
-          name="tenure"
+          name="yearsExperience"
           placeholder="Years of Experience"
           value={formData.tenure}
           onChange={handleChange}
@@ -90,7 +91,7 @@ const EmployeeInput = () => {
         <input
           className="form-input"
           type="number"
-          name="score"
+          name="performanceScore"
           placeholder="Performance Score"
           value={formData.score}
           onChange={handleChange}
@@ -101,7 +102,7 @@ const EmployeeInput = () => {
         <input
           className="form-input"
           type="text"
-          name="role"
+          name="jobRole"
           placeholder="Job Role"
           value={formData.role}
           onChange={handleChange}
